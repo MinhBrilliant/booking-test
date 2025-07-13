@@ -2,7 +2,7 @@ package com.booking.config;
 
 import java.io.IOException;
 
-import com.booking.entity.User;
+import com.booking.entity.Users;
 import com.booking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -56,7 +56,7 @@ public class SecurityConfig {
 	    @Bean
 	    public UserDetailsService userDetailsService() {
 	        return username -> {
-	            User user = userService.findByUsername(username);
+	            Users user = userService.findByUsername(username);
 	            if (user != null) {
 	                return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 	                        user.getRoles().stream()

@@ -3,7 +3,7 @@ package com.booking.controller;
 import java.util.List;
 
 import com.booking.entity.Role;
-import com.booking.entity.User;
+import com.booking.entity.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class AuthController {
 
 	    @GetMapping("/register")
 	    public String showRegistrationForm(Model model) {
-	        User user = new User();
+	        Users user = new Users();
 	        List<Role> roles = userService.getAllRoles(); // Fetch all roles dynamically
 	        model.addAttribute("user", user);
 	        model.addAttribute("roles", roles); // Pass roles to the view
@@ -30,7 +30,7 @@ public class AuthController {
 	    }
 
 	    @PostMapping("/register")
-	    public String registerUser(@ModelAttribute("user") User user, String roleName, Model model) {
+	    public String registerUser(@ModelAttribute("user") Users user, String roleName, Model model) {
 	        if (userService.findByUsername(user.getUsername()) != null) {
 	            model.addAttribute("error", "Username is already taken");
 	            return "register";

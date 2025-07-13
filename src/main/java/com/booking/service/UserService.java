@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.booking.entity.Role;
-import com.booking.entity.User;
+import com.booking.entity.Users;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(User user, String roleName) {
+    public Users registerUser(Users user, String roleName) {
         // Set the password and roles
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role selectedRole = roleRepository.findByName(roleName);
@@ -36,7 +36,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
+    public Users findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
     public boolean existsByEmail(String email) {

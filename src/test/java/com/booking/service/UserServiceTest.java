@@ -1,7 +1,7 @@
 package com.booking.service;
 
 import com.booking.entity.Role;
-import com.booking.entity.User;
+import com.booking.entity.Users;
 import com.booking.repository.RoleRepository;
 import com.booking.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ class UserServiceTest {
     @Test
     void testRegisterUser() {
         // Setup
-        final User user = new User();
+        final Users user = new Users();
         user.setId(0L);
         user.setUsername("username");
         user.setPassword("password");
@@ -52,17 +52,17 @@ class UserServiceTest {
         when(mockRoleRepository.findByName("roleName")).thenReturn(new Role("roleName"));
 
         // Configure UserRepository.save(...).
-        final User user1 = new User();
+        final Users user1 = new Users();
         user1.setId(0L);
         user1.setUsername("username");
         user1.setPassword("password");
         user1.setEmail("email");
         final Role role1 = new Role();
         user1.setRoles(Set.of(role1));
-        when(mockUserRepository.save(any(User.class))).thenReturn(user1);
+        when(mockUserRepository.save(any(Users.class))).thenReturn(user1);
 
         // Run the test
-        final User result = userServiceUnderTest.registerUser(user, "roleName");
+        final Users result = userServiceUnderTest.registerUser(user, "roleName");
 
         // Verify the results
     }
@@ -71,18 +71,18 @@ class UserServiceTest {
     void testFindByUsername() {
         // Setup
         // Configure UserRepository.findByUsername(...).
-        final User user1 = new User();
+        final Users user1 = new Users();
         user1.setId(0L);
         user1.setUsername("username");
         user1.setPassword("password");
         user1.setEmail("email");
         final Role role = new Role();
         user1.setRoles(Set.of(role));
-        final Optional<User> user = Optional.of(user1);
+        final Optional<Users> user = Optional.of(user1);
         when(mockUserRepository.findByUsername("username")).thenReturn(user);
 
         // Run the test
-        final User result = userServiceUnderTest.findByUsername("username");
+        final Users result = userServiceUnderTest.findByUsername("username");
 
         // Verify the results
     }
@@ -93,7 +93,7 @@ class UserServiceTest {
         when(mockUserRepository.findByUsername("username")).thenReturn(Optional.empty());
 
         // Run the test
-        final User result = userServiceUnderTest.findByUsername("username");
+        final Users result = userServiceUnderTest.findByUsername("username");
 
         // Verify the results
         assertThat(result).isNull();
