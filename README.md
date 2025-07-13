@@ -1,5 +1,5 @@
 # Booking Management Guide
- In this project we are imlementing the functions as below:
+ In this project we are implementing the functions as below:
 1. Register new user function: http://localhost:8081/register
 2. Login function: http://localhost:8081/login
 3. List Seat Types, Update Seat Type, Create Seat Type, Duplicate Seat Type, Delete Seat Type
@@ -9,5 +9,6 @@
 Note: When user login successfully. the system redirect to Seat Type list to book function.
    
 How to run project
-1. clone project:
-2.
+1. clone project from github: https://github.com/MinhBrilliant/booking-test
+2. in folder project. run cmd docker-compose up -d --build (pre-condition you need setup docker in your PC firstly)
+3. Using the functions above
