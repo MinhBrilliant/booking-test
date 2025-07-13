@@ -10,18 +10,35 @@ services:
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@//db:1521/orcl
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@//db:1521/XEPDB1
       SPRING_DATASOURCE_USERNAME: system
       SPRING_DATASOURCE_PASSWORD: Hongngoc1234@
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
 
   db:
     image: gvenzl/oracle-xe:21-slim
     container_name: oracle-db
     ports:
       - "1521:1521"
+    volumes:
+      - ./init.sql:/container-entrypoint-initdb.d/init.sql
     environment:
       ORACLE_PASSWORD: Hongngoc1234@
-      ORACLE_DATABASE: orcl
+      ORACLE_DATABASE: XEPDB1
+    platform: linux/amd64
+    healthcheck:
+      test: ["CMD", "sqlplus", "-L", "system/Hongngoc1234@@localhost:1521/XEPDB1", "as", "sysdba", "<<EOF\nselect 1 from dual;\nEOF"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
