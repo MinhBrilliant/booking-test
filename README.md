@@ -10,6 +10,7 @@ Note: When user login successfully. the system redirect to Seat Type list to boo
    
 How to run project
 1. Pre-condition setup
+
    1.1. download and install git Guide: https://github.com/git-guides/install-git.
    
    1.2 download and setup maven enviroment for windown: https://www.testingdocs.com/setting-up-maven_home-on-windows-10/.
