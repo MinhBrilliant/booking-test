@@ -19,3 +19,5 @@ How to run project
 3. clone project from github: https://github.com/MinhBrilliant/booking-test
 4. in folder of project. run cmd: docker-compose up -d --build (pre-condition you need setup docker in your PC firstly)
 5. Using the functions above
+6. if restart app: run cmd: restart booking-management-app
+7. if stop app: docker stop booking-management-app
