@@ -20,9 +20,9 @@ How to run project
 4. in folder of project. run cmd: docker-compose up -d --build (pre-condition you need setup docker in your PC firstly)
 5. Restart service
 
-   5.1. if restart db-> run cmd: restart oracle-db
+   5.1. if restart db-> run cmd: docker restart oracle-db
 
-   5.1. if restart app-> run cmd: restart booking-management-app
+   5.1. if restart app-> run cmd: docker restart booking-management-app
 6. Using the functions above
 
 7. if stop app: docker stop booking-management-app
