@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Optional;
@@ -50,9 +51,10 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public String getLatestSeatTypeCode() {
-        String latestSeatTypeCode = bookingRepository.getLatestSeatTypeCode();
-        if (!StringUtils.hasLength(latestSeatTypeCode)){
-            latestSeatTypeCode = "0";
+        String latestSeatTypeCode = "0";
+        Booking booking = bookingRepository.findFirstByOrderBySeatTypeCodeDesc();
+        if (!ObjectUtils.isEmpty(booking)){
+            latestSeatTypeCode = booking.getSeatTypeCode();
         }
         int nextSeatTypeCode = Integer.parseInt(latestSeatTypeCode) + 1;
         if (nextSeatTypeCode < 10){

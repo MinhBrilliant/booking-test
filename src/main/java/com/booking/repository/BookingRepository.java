@@ -14,6 +14,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query(value = "select seat_type_cd from booking order by seat_type_cd desc limit 1", nativeQuery = true)
     String getLatestSeatTypeCode();
 
+    Booking findFirstByOrderBySeatTypeCodeDesc();
+
     Optional<Booking> findByIdAndDeleted(Long id, boolean isDeleted);
 
     Page<Booking> findByBookedAndDeleted(boolean isBooked, boolean isDeleted, Pageable pageable);
