@@ -14,6 +14,5 @@ How to run project
    1.2 download and setup maven enviroment for windown: https://www.testingdocs.com/setting-up-maven_home-on-windows-10/
    1.3 download and istall docker: https://docs.docker.com/desktop/setup/install/windows-install/
 2. clone project from github: https://github.com/MinhBrilliant/booking-test
-3. in folder project. run cmd: mvn install
-4. run cmd: docker-compose up -d --build (pre-condition you need setup docker in your PC firstly)
-5. Using the functions above
+3. in folder of project. run cmd: docker-compose up -d --build (pre-condition you need setup docker in your PC firstly)
+4. Using the functions above
