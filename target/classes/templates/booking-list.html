@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Booking Management System</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Booking List</h1>
+
+    <a th:href="@{'/book-type/showNewBookingForm' + '?isLogin=false&pageNo=' + ${currentPage}}" class="btn btn-primary btn-sm mb-3 add-new" style="margin-bottom: 8px"> Add Booking </a>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead style="background-color:#1c87c9;">
+        <tr>
+            <th>
+                Seat Type Code
+            </th>
+            <th>
+                Seat Type Name
+            </th>
+            <th>
+                Worker Memo
+            </th>
+            <th>
+                Booking Status
+            </th>
+            <th> Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${listBookings}" style="height: 2em" th:style="${booking.deleted == true ? 'background-color:grey' : ''}" >
+            <td th:text="${booking.seatTypeCode}"></td>
+            <td th:text="${booking.seatTypeName}"></td>
+            <td th:text="${booking.workerMemo}"></td>
+            <td th:text="${booking.isBooked}"></td>
+            <td><a th:unless="${booking.deleted}" th:href="@{'/book-type/showFormForUpdate/' + ${booking.id} + '?isLogin=false&pageNo=' + ${currentPage}}" class="btn btn-primary btn-list">Update</a>
+                <a th:unless="${booking.deleted}" th:if="${booking.booked}" data-target="#myModal" data-toggle="modal"
+                   class="btn btn-danger btn-list">Delete</a>
+                <a th:unless="${booking.deleted} or ${booking.booked}"
+                   th:href="@{'/book-type/delete/' + ${booking.id} + '?isLogin=false&pageNo=' + ${currentPage}}" class="btn btn-danger btn-list">Delete</a>
+                <a th:unless="${booking.deleted}" th:href="@{'/book-type/duplicate/' + ${booking.id} + '?isLogin=false&pageNo=' + ${currentPage}}"   class="btn btn-list btn-info" style="">Duplicate</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${totalPages > 1}">
+        <div class="row row-paging col-sm-10" style="display: flex">
+            <div class="col-sm-2 total">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div>
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}"
+                           th:href="@{'/book-type/page/' + ${i}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/book-type/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/book-type/page/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                <p>Cannot delete this seat type as it is currently in use.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function showModal(isBooked) {
+        console.log(isBooked)
+        if (isBooked){
+            document.getElementById("myModal").style.display = 'block';
+            return;
+        }
+        else {
+            document.getElementById("myModal").style.display = 'none';
+        }
+
+    }
+
+</script>
+</body>
+</html>

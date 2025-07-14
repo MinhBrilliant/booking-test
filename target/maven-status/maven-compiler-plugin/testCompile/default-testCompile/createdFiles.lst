@@ -1,0 +1,4 @@
+com\booking\service\impl\AuditorAwareImplTest.class
+com\booking\service\UserServiceTest.class
+com\booking\service\impl\BookingServiceImplTest.class
+com\booking\BookingSeatTypeApplicationTests.class
