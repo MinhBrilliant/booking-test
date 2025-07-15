@@ -15,7 +15,9 @@ How to run project
    
    1.2 download and setup maven enviroment for windown: https://www.testingdocs.com/setting-up-maven_home-on-windows-10/.
    
-   1.3 download and istall docker: https://docs.docker.com/desktop/setup/install/windows-install/.
+   1.3 download and istall docker: https://docs.docker.com/desktop/setup/install/windows-install/
+
+   1.4 update windows subsystem for linux: run cmd: wsl --install
 3. clone project from github: https://github.com/MinhBrilliant/booking-test
 4. in folder of project. run cmd: docker-compose up -d --build (pre-condition you need setup docker in your PC firstly)
 5. Restart service
